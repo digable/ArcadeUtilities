@@ -1,6 +1,6 @@
 ﻿namespace ArcadeUtilities
 {
-    partial class Form1
+    partial class Form_main
     {
         /// <summary>
         /// Required designer variable.
