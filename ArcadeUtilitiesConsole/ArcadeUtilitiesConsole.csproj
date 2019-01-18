@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Functions\INI.cs" />
     <Compile Include="Functions\Roms.cs" />
+    <Compile Include="Functions\XML.cs" />
     <Compile Include="Models\Roms.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
