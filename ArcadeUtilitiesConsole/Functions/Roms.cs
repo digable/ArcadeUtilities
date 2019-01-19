@@ -26,6 +26,9 @@ namespace ArcadeUtilitiesConsole.Functions
                     string[] files = Directory.GetFiles(r.Directory, "*." + ext, SearchOption.TopDirectoryOnly);
                     if (files.Length > 0) l.AddRange(files.Select(a => Path.GetFileNameWithoutExtension(a)).ToArray());
                 }
+
+                l.Sort();
+
                 return l;
             }
 

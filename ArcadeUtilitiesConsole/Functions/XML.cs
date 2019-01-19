@@ -37,7 +37,23 @@ namespace ArcadeUtilitiesConsole.Functions
                 {
                     List<string> l = new List<string>();
 
+                    XmlDocument xmlDoc = new XmlDocument();
+                    xmlDoc.Load(file);
+
                     //INFO: path --> root--><dat><emulator emuname="MAME" emuDesc="MAME Defaults and Control Overrides">
+                    XmlNode mameNode = xmlDoc.SelectSingleNode(@"//dat/emulator[@emuname='MAME']");
+                    XmlNodeList roms = mameNode.SelectNodes(@"controlGroup");
+                    foreach(XmlNode rom in roms)
+                    {
+                        XmlAttributeCollection ac = rom.Attributes;
+                        string groupName = ac.GetNamedItem("groupName").Value;
+                        l.Add(groupName);
+
+                    }
+
+                    //INFO: sort the rom names
+                    l.Sort();
+
                     //then get the nodes below called <controlGroup groupName="DEFAULT"
                     //groupname is the rom name
                     return l;

@@ -65,9 +65,8 @@ namespace ArcadeUtilitiesConsole
                     //LEDBlinkyControlsXML = Functions.XML.LEDBlinkyControls.ExtractData(filePathLEDBlinkyControlsXML);
                 }
             }
-            //should probably use xpath for specific information on this, get the roms first, then start pulling controls and colors
-            //<dat><emulator>
-            //<dat><emulator><controlgroup>
+
+            Reports.Roms.Compare(mameRomNames, ColorsINI, ControlsINI, LEDBlinkyControlsRoms);
         }
     }
 }
