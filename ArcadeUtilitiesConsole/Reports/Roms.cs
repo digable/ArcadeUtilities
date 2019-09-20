@@ -11,6 +11,7 @@ namespace ArcadeUtilitiesConsole.Reports
     {
         //do a complare with the sources, the mame rom list being the master
         public static void Compare( List<string> mameRoms,
+                                    List<string> mameCFGRoms,
                                     Dictionary<string, List<Dictionary<string, object>>> colorsINI,
                                     Dictionary<string, List<Dictionary<string, object>>> controlsINI,
                                     List<string> LEDBlinkyControlsRoms)
@@ -18,7 +19,7 @@ namespace ArcadeUtilitiesConsole.Reports
             string filename = "rom-compare_" + DateTime.Now.ToString("yyyy-MM-dd_hh-mm-ss") + ".csv";
             string delimiter = ",";
 
-            string header = "MAME" + delimiter + "Colors.ini" + delimiter + "Controls.ini" + delimiter + "LEDBlinkyControls.xml";
+            string header = "MAME" + delimiter + "MAME_cfg" + delimiter + "Colors.ini" + delimiter + "Controls.ini" + delimiter + "LEDBlinkyControls.xml";
 
             char[] trimChars = new char[] { '\\' };
             string RomsReport = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase).TrimEnd(trimChars) + @"\" + filename;
@@ -43,6 +44,9 @@ namespace ArcadeUtilitiesConsole.Reports
                 string romName = mameRomName.ToLower();
                 string line = string.Empty;
                 line += romName + delimiter;
+
+                if (mameCFGRoms.Contains(romName)) line += "X" + delimiter;
+                else line += delimiter;
 
                 if (colorsINIRoms.Contains(romName)) line += "X" + delimiter;
                 else line += delimiter;

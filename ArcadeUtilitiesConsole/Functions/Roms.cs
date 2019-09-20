@@ -24,7 +24,7 @@ namespace ArcadeUtilitiesConsole.Functions
                 foreach (string ext in r.FileExtensions)
                 {
                     string[] files = Directory.GetFiles(r.Directory, "*." + ext, SearchOption.TopDirectoryOnly);
-                    if (files.Length > 0) l.AddRange(files.Select(a => Path.GetFileNameWithoutExtension(a)).ToArray());
+                    if (files.Length > 0) l.AddRange(files.Select(a => Path.GetFileNameWithoutExtension(a).ToLower()).ToArray());
                 }
 
                 l.Sort();
@@ -32,6 +32,17 @@ namespace ArcadeUtilitiesConsole.Functions
                 return l;
             }
 
+            public static List<string> MAMECFGRomNames(string directory)
+            {
+                List<string> l = new List<string>();
+
+                string[] files = Directory.GetFiles(directory, "*.cfg", SearchOption.TopDirectoryOnly);
+                if (files.Length > 0) l.AddRange(files.Select(a => Path.GetFileNameWithoutExtension(a).ToLower()).ToArray());
+
+                l.Sort();
+
+                return l;
+            }
         }
     }
 }

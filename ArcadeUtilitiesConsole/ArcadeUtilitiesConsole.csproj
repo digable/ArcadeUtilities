@@ -50,6 +50,7 @@
     <Compile Include="Models\Roms.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\Buttons.cs" />
     <Compile Include="Reports\Roms.cs" />
   </ItemGroup>
   <ItemGroup>

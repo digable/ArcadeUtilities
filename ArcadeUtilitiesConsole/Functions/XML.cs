@@ -58,6 +58,66 @@ namespace ArcadeUtilitiesConsole.Functions
                     //groupname is the rom name
                     return l;
                 }
+
+                public static Dictionary<string, string> Rom(string romName, string file)
+                {
+                    Dictionary<string, string> d = new Dictionary<string, string>();
+
+                    XmlDocument xmlDoc = new XmlDocument();
+                    xmlDoc.Load(file);
+
+                    XmlNode mameNode = xmlDoc.SelectSingleNode(@"//dat/emulator[@emuname='MAME']");
+                    XmlNode rom = mameNode.SelectSingleNode(@"controlGroup[@groupName='" + romName + "']");
+
+                    XmlNodeList players = rom.SelectNodes(@"player");
+
+                    foreach(XmlNode player in players)
+                    {
+                        if (player.Attributes.GetNamedItem("number").Value == "0")
+                        {
+                            //INFO: this is the default
+                            //<player number="0">
+                            //  <control name="CONTROL_JOY8WAY" voice="8-way Joystick" color="Black" primaryControl="1" />
+                            //</player>
+                        }
+                        else
+                        {
+                            //<control name="P1_BUTTON1" voice="Left Punch" color="Red"/>
+                            XmlNodeList controls = player.SelectNodes(@"control");
+                            foreach (XmlNode control in controls)
+                            {
+                                XmlAttributeCollection ac = control.Attributes;
+                                foreach (XmlAttribute a in ac)
+                                {
+                                    //name, voice, color
+                                    switch(a.Name.ToLower())
+                                    {
+                                        case "name":
+
+                                            break;
+                                        case "voice":
+
+                                            break;
+                                        case "color":
+
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                }
+                            }
+                            controls = null;
+                        }
+                    }
+                    players = null;
+                    rom = null;
+                    mameNode = null;
+                    xmlDoc = null;
+                    file = null;
+                    romName = null;
+
+                    return d;
+                }
             }
         }
     }

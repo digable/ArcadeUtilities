@@ -23,12 +23,21 @@ namespace ArcadeUtilitiesConsole
             //make sure to compare all the files to each other as well
             //check for color inconsistences between Colors.ini and LEDBlinkyControls.xml
             //report all of this
+            //colors.ini + controls.ini + ledblinkycontrols.xml + *.cfg of rom --> check the controls and the button mappings
             //-----
 
             string LEDBlinkyDirectory = ConfigurationManager.AppSettings["LEDBlinkyDirectory"].TrimEnd('\\');
 
             //INFO: get list of roms in C:\Emulators\_roms\mame (*.zip)
             List<string> mameRomNames = Functions.Roms.Get.Filenames(Models.Roms.RomType.MAME);
+
+            //INFO: get list of rom cfgs in C:\Emulators\MAME\cfg
+            List<string> mameCfgRomNames = new List<string>();
+            string CFGDirectory_MAME = ConfigurationManager.AppSettings["CFGDirectory_MAME"].TrimEnd('\\');
+            if (Directory.Exists(CFGDirectory_MAME))
+            {
+                mameCfgRomNames = Functions.Roms.Get.MAMECFGRomNames(CFGDirectory_MAME);
+            }
 
             //INFO: colors ini file parsing
             string ColorsIniFile = ConfigurationManager.AppSettings["ColorsIniFile"].Trim();
@@ -66,7 +75,9 @@ namespace ArcadeUtilitiesConsole
                 }
             }
 
-            Reports.Roms.Compare(mameRomNames, ColorsINI, ControlsINI, LEDBlinkyControlsRoms);
+            Reports.Roms.Compare(mameRomNames, mameCfgRomNames, ColorsINI, ControlsINI, LEDBlinkyControlsRoms);
+
+            Reports.Buttons.Get.Mappings("mk2r21", mameRomNames, mameCfgRomNames, ColorsINI, ControlsINI, filePathLEDBlinkyControlsXML);
         }
     }
 }
