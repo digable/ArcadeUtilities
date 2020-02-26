@@ -45,6 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Functions\INI.cs" />
+    <Compile Include="Functions\LaunchBox.cs" />
+    <Compile Include="Functions\MAME.cs" />
     <Compile Include="Functions\Roms.cs" />
     <Compile Include="Functions\XML.cs" />
     <Compile Include="Models\Roms.cs" />

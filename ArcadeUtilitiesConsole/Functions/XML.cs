@@ -28,6 +28,7 @@ namespace ArcadeUtilitiesConsole.Functions
 
             return b;
         }
+
         public class LEDBlinkyControls
         {
             //TODO: need to figure a way to validate xml files when this class is called
